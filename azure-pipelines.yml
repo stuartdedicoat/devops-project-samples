@@ -13,6 +13,18 @@ steps:
 - script: echo Hello, world!
   displayName: 'Run a one-line script'
 
+variables:
+  dockerId: mooduser  # Replace with your Docker ID for Docker Hub or the admin user name for the Azure Container Registry
+  imageName: my-image-name  # Replace with the name of the image you want to publish
+
+steps:
+- script: |
+    docker build -t $(dockerId).azurecr.io/$(imageName) .
+    docker login -u $(dockerId) -p $(pswd) $(dockerId).azurecr.io
+    docker push $(dockerId).azurecr.io/$(imageName)
+  env:
+    pswd: $(dockerPassword)        # Define dockerPassword in the Variables tab of this pipeline in Pipelines page of web interface  
+
 
 - script: |
     echo Add other tasks to build, test, and deploy your project.
