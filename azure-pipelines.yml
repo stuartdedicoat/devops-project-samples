@@ -16,6 +16,7 @@ steps:
 variables:
   dockerId: mooduser  # Replace with your Docker ID for Docker Hub or the admin user name for the Azure Container Registry
   imageName: my-image-name  # Replace with the name of the image you want to publish
+  dockerPassword: Pooraftercut30
 
 - script: |
     docker build -t $(dockerId).azurecr.io/$(imageName) .
